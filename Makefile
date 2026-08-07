@@ -26,7 +26,7 @@ fix:
 	$(UV) run ruff check --fix .
 
 build:
-	./build.sh
+	chmod +x ./build.sh
 
 render-start:
 	gunicorn task_manager.wsgi
