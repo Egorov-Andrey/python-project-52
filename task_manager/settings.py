@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-ALLOWED_HOSTS = ['webserver']
+ALLOWED_HOSTS = ['webserver', '127.0.0.1']
 
 
 # Application definition
