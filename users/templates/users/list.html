@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4">
+    <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+        <h2 class="text-lg font-medium text-gray-800 mb-4">Список пользователей</h2>
+        
+        {% if users %}
+            <ul class="divide-y divide-gray-200">
+                {% for user in users %}
+                    <li class="py-3 flex justify-between items-center">
+                        <div>
+                            <span class="font-medium text-gray-800">{{ user.username }}</span>
+                            {% if user.first_name or user.last_name %}
+                                <span class="text-gray-500 text-sm ml-2">
+                                    ({{ user.first_name }} {{ user.last_name }})
+                                </span>
+                            {% endif %}
+                        </div>
+                        <div class="flex space-x-2">
+                            <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">Редактировать</a>
+                            <a href="{% url 'user_delete' user.id %}" 
+                               class="text-red-600 hover:text-red-800 text-sm">
+                                Удалить
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-gray-500 text-sm">Пользователей пока нет.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

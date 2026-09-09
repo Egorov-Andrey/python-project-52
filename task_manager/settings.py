@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_tailwind_cli',
+    'pages',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -51,10 +54,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'task_manager.urls'
 
+LOGIN_REDIRECT_URL = 'main'
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,6 +128,8 @@ USE_TZ = True
 # Here, they well be accessible at your-domain.onrender.com/static/... or
 #  yourcustomdomain.com/static/...
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "assets"]
+
 
 # This production code might break development mode, so we check whether we're
 #  in DEBUG mode
@@ -135,3 +144,10 @@ if not DEBUG:
     #  long-term caching
     STATICFILES_STORAGE = 'whitenoise.storage.' \
     'CompressedManifestStaticFilesStorage'
+
+TAILWIND_CLI_VERSION = "4.1.3"
+
+if DEBUG:
+    TAILWIND_CLI_MINIFY = False
+else:
+    TAILWIND_CLI_MINIFY = True
