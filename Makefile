@@ -12,6 +12,8 @@ migrate:
 collectstatic:
 	$(MANAGE) collectstatic --noinput
 
+setup: install collectstatic migrate
+
 runserver:
 	@echo "Запуск сервера... (Ctrl+C для остановки)"
 	$(MANAGE) runserver
