@@ -179,3 +179,6 @@ if DEBUG:
     TAILWIND_CLI_MINIFY = False
 else:
     TAILWIND_CLI_MINIFY = True
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
