@@ -10,6 +10,7 @@ dependencies = [
     "django-tailwind-cli>=4.7.0",
     "gunicorn>=26.0.0",
     "psycopg2-binary>=2.9.12",
+    "sentry-sdk>=2.70.0",
     "whitenoise[brotli]>=6.12.0",
 ]
 
@@ -22,6 +23,9 @@ packages = ["task_manager"]
 
 [dependency-groups]
 dev = [
+    "django-extensions>=4.1",
+    "ipython>=9.17.1",
+    "pydotplus>=2.0.2",
     "python-dotenv>=1.2.2",
     "ruff>=0.16.0",
 ]

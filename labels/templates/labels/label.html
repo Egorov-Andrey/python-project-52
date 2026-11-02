@@ -1,0 +1,61 @@
+{% extends 'base_auth.html' %}
+
+{% block title %}Метки - Менеджер задач{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto">
+    
+    <!-- Заголовок -->
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Статусы</h1>
+    
+    <!-- Кнопка создания -->
+    <div class="mb-4">
+        <a href="{% url 'labels_create' %}" 
+           class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-1.5 rounded transition-colors">
+            Создать метку
+        </a>
+    </div>
+    
+    <!-- Таблица -->
+    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <table class="w-full">
+            <thead class="bg-gray-50 border-b border-gray-200">
+                <tr>
+                    <th class="text-left px-4 py-2 text-sm font-medium text-gray-600 w-16">ID</th>
+                    <th class="text-left px-4 py-2 text-sm font-medium text-gray-600">Имя</th>
+                    <th class="text-left px-4 py-2 text-sm font-medium text-gray-600">Дата создания</th>
+                    <th class="text-left px-4 py-2 text-sm font-medium text-gray-600 w-40"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for label in labels %}
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-2 text-sm text-gray-800">{{ label.id }}</td>
+                        <td class="px-4 py-2 text-sm text-gray-800">{{ label.name }}</td>
+                        <td class="px-4 py-2 text-sm text-gray-600">
+                            {{ label.created_at|date:"d.m.Y H:i" }}
+                        </td>
+                        <td class="px-4 py-2 text-sm">
+                            <a href="{% url 'label_update' label.id %}" 
+                               class="text-blue-600 hover:text-blue-800 block">
+                                Изменить
+                            </a>
+                            <a href="{% url 'label_delete' label.id %}" 
+                               class="text-blue-600 hover:text-blue-800 block">
+                                Удалить
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="px-4 py-6 text-center text-gray-500 text-sm">
+                            Меток пока нет.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+{% endblock %}

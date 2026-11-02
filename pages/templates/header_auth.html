@@ -1,0 +1,33 @@
+<header class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+            
+            <div class="flex items-center space-x-6">
+                <a class="text-gray-800 font-medium">
+                    Менеджер задач
+                </a>
+                <a class="text-gray-600 hover:text-gray-900">
+                    Пользователи
+                </a>
+                <a class="text-gray-600 hover:text-gray-900">
+                    Статусы
+                </a>
+                <a class="text-gray-600 hover:text-gray-900">
+                    Метки
+                </a>
+                <a class="text-gray-600 hover:text-gray-900">
+                    Задачи
+                </a>
+            </div>
+
+            <div>
+                <form method="post" action="{% url 'logout' %}" class="inline">
+                    {% csrf_token %}
+                    <button type="submit" class="text-gray-600 hover:text-gray-900">
+                        Выход
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<div class="ml-auto flex items-center">
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to|default:request.path }}">
+        <select
+            name="language"
+            onchange="this.form.submit()"
+            class="
+            border border-gray-300
+            rounded-lg
+            px-3 py-2
+            text-sm
+            bg-white
+            focus:ring-2 focus:ring-blue-500
+            focus:border-transparent
+            outline-none
+            cursor-pointer
+            shadow-sm
+            ">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+
+            {% for lang_code, lang_name in LANGUAGES %}
+                <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                    {{ lang_name }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+</div>

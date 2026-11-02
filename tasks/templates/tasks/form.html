@@ -1,0 +1,119 @@
+{% extends 'base_auth.html' %}
+
+{% block title %}
+    {% if form.instance.pk %}Изменить задачу{% else %}Создать задачу{% endif %} - Менеджер задач
+{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    
+    <!-- Заголовок -->
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">
+        {% if form.instance.pk %}Изменить задачу{% else %}Создать задачу{% endif %}
+    </h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Имя -->
+        <div class="mb-4">
+            <label for="{{ form.name.id_for_label }}" class="block text-sm text-gray-600 mb-1">
+                Имя:
+            </label>
+            {% if form.name.errors %}
+                <p class="text-red-500 text-sm mb-1">{{ form.name.errors.0 }}</p>
+            {% endif %}
+            <input type="text" 
+                   name="{{ form.name.name }}" 
+                   id="{{ form.name.id_for_label }}"
+                   value="{{ form.name.value|default:'' }}"
+                   class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        
+        <!-- Описание -->
+        <div class="mb-4">
+            <label for="{{ form.description.id_for_label }}" class="block text-sm text-gray-600 mb-1">
+                Описание:
+            </label>
+            {% if form.description.errors %}
+                <p class="text-red-500 text-sm mb-1">{{ form.description.errors.0 }}</p>
+            {% endif %}
+            <textarea name="{{ form.description.name }}" 
+                      id="{{ form.description.id_for_label }}"
+                      rows="8"
+                      class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">{{ form.description.value|default:'' }}</textarea>
+        </div>
+        
+        <!-- Статус -->
+        <div class="mb-4">
+            <label for="{{ form.status.id_for_label }}" class="block text-sm text-gray-600 mb-1">
+                Статус:
+            </label>
+            {% if form.status.errors %}
+                <p class="text-red-500 text-sm mb-1">{{ form.status.errors.0 }}</p>
+            {% endif %}
+            <select name="{{ form.status.name }}" 
+                    id="{{ form.status.id_for_label }}"
+                    class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                {% for choice in form.status.field.choices %}
+                    <option value="{{ choice.0 }}" {% if form.status.value|stringformat:"s" == choice.0|stringformat:"s" %}selected{% endif %}>
+                        {{ choice.1 }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- Исполнитель -->
+        <div class="mb-4">
+            <label for="{{ form.executor.id_for_label }}" class="block text-sm text-gray-600 mb-1">
+                Исполнитель:
+            </label>
+            {% if form.executor.errors %}
+                <p class="text-red-500 text-sm mb-1">{{ form.executor.errors.0 }}</p>
+            {% endif %}
+            <select name="{{ form.executor.name }}" 
+                    id="{{ form.executor.id_for_label }}"
+                    class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                {% for choice in form.executor.field.choices %}
+                    <option value="{{ choice.0 }}" {% if form.executor.value|stringformat:"s" == choice.0|stringformat:"s" %}selected{% endif %}>
+                        {{ choice.1 }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- Метки -->
+        <div class="mb-6">
+            <label for="{{ form.labels.id_for_label }}" class="block text-sm text-gray-600 mb-1">
+                Метки:
+            </label>
+            {% if form.labels.errors %}
+                <p class="text-red-500 text-sm mb-1">{{ form.labels.errors.0 }}</p>
+            {% endif %}
+            <select name="{{ form.labels.name }}" 
+                    id="{{ form.labels.id_for_label }}"
+                    multiple
+                    size="5"
+                    class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                {% for choice in form.labels.field.choices %}
+                    <option value="{{ choice.0 }}" 
+                        {% if choice.0 in form.labels.value %}selected{% endif %}>
+                        {{ choice.1 }}
+                    </option>
+                {% endfor %}
+            </select>
+            <p class="text-xs text-gray-400 mt-1">
+                Удерживайте Ctrl (или Cmd на Mac), чтобы выбрать несколько меток.
+            </p>
+        </div>
+        
+        <!-- Кнопка -->
+        <button type="submit" 
+                class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-6 py-2 rounded transition-colors">
+            {% if form.instance.pk %}Изменить{% else %}Создать{% endif %}
+        </button>
+        
+    </form>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base_auth.html' %}
+
+{% block title %}Удаление задачи - Менеджер задач{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto">
+    <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+        <h2 class="text-lg font-medium text-gray-800 mb-2">Удаление задачи</h2>
+        
+        <p class="text-gray-600 text-sm mb-4">
+            Вы уверены, что хотите удалить задачу 
+            <span class="font-medium text-gray-800">"{{ object.name }}"</span>?
+        </p>
+        
+        <p class="text-red-500 text-xs mb-4">
+            ⚠️ Это действие необратимо.
+        </p>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="flex space-x-3">
+                <button type="submit" 
+                        class="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-1.5 rounded transition-colors">
+                    Да, удалить
+                </button>
+                <a href="{% url 'tasks' %}" 
+                   class="flex-1 text-center bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-1.5 rounded transition-colors">
+                    Отмена
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

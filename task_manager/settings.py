@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 from pathlib import Path
+
 import dj_database_url
+import sentry_sdk
 from dotenv import load_dotenv
+from sentry_sdk.integrations.django import DjangoIntegration
 
 load_dotenv()
 
@@ -27,6 +30,18 @@ ALLOWED_HOSTS = ['webserver', '127.0.0.1']
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
+sentry_sdk.init(dsn=os.getenv("SENTRY_SDK"),
+                release=os.getenv("RELEASE", "dev"),
+                environment=os.getenv("SENTRY_ENVIRONMENT", "development"),
+                traces_sample_rate=float(os.getenv("TRACES_SAMPLE_RATE", "0")),
+                send_default_pii=os.getenv("SEND_DEFAULT_PII", "False").lower() == "true",
+                max_request_body_size=os.getenv("MAX_REQUEST_BODY_SIZE", "medium"),
+
+                send_client_reports=False,
+                auto_session_tracking=False,
+
+                integrations=[DjangoIntegration()],)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -36,9 +51,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'django_tailwind_cli',
     'pages',
     'users',
+    'statuses',
+    'labels',
+    'tasks'
 ]
 
 MIDDLEWARE = [
@@ -50,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'task_manager.urls'
@@ -128,8 +148,16 @@ USE_TZ = True
 # Here, they well be accessible at your-domain.onrender.com/static/... or
 #  yourcustomdomain.com/static/...
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "assets"]
+STATICFILES_DIRS = [BASE_DIR / "assets",]
 
+LOCALE_PATHS = [BASE_DIR / "locale",]
+
+LANGUAGE_CODE = 'ru'
+
+LANGUAGES = [
+    ('ru', 'Русский'),
+    ('en', 'English'),
+]
 
 # This production code might break development mode, so we check whether we're
 #  in DEBUG mode

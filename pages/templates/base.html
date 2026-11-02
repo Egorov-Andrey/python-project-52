@@ -9,20 +9,30 @@
 </head>
 <body class="bg-white min-h-screen flex flex-col">
     
-    <!-- Хедер -->
+
     <header class="border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-6">
-                    <span class="text-gray-700">Менеджер задач</span>
-                    <span class="text-gray-500">Пользователи</span>
-                </div>
-                <div class="flex items-center space-x-6">
-                    <span class="text-gray-500">Вход</span>
-                    <span class="text-gray-500">Регистрация</span>
-                </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-3">
+        
+
+        <div class="flex justify-between items-center">
+            
+
+            <div class="flex items-center space-x-6">
+                <span class="text-gray-700 font-medium">Менеджер задач</span>
+                <span class="text-gray-500">Пользователи</span>
+            </div>
+
+
+            <div class="flex items-center space-x-6">
+                <span class="text-gray-500">Вход</span>
+                <span class="text-gray-500">Регистрация</span>
+                
+
+                {% include "lang_form.html" with redirect_to=request.path %}
             </div>
         </div>
+    </div>
     </header>
 
     {% if messages %}
@@ -48,14 +58,14 @@
     {% endif %}
 
 
-    <!-- Контент -->
+
     <main class="flex-grow pt-10">
         <div class="max-w-7xl mx-auto px-4">
             {% block content %}{% endblock %}
         </div>
     </main>
 
-    <!-- Футер -->
+
     <footer class="border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-4 py-3 text-center text-sm text-gray-400">
             Hexlet

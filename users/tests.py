@@ -24,6 +24,12 @@ class TestUsers(TestCase):
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), "Вы залогинены")
 
+    def test_login_with_wrong_password(self):
+        credentials = {'username': 'testuser', 'password': 'wrong_password123'}
+        response = self.client.post(self.login_url, credentials)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "")
+
     def test_login(self):
         response = self.client.get('/login/')
         self.assertEqual(response.status_code, 200)

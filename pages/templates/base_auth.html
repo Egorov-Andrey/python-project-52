@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Менеджер задач{% endblock %}</title>
+    {% load tailwind_cli %}
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    
+
+    {% include 'header_auth.html' %}
+
+
+    {% if messages %}
+        <div class="max-w-7xl mx-auto px-4 pt-4">
+            {% for message in messages %}
+                <div class="p-3 rounded-lg border mb-2 
+                    {% if message.tags == 'success' %}
+                        bg-green-50 border-green-200 text-green-700
+                    {% elif message.tags == 'error' %}
+                        bg-red-50 border-red-200 text-red-700
+                    {% elif message.tags == 'warning' %}
+                        bg-yellow-50 border-yellow-200 text-yellow-700
+                    {% else %}
+                        bg-blue-50 border-blue-200 text-blue-700
+                    {% endif %}
+                ">
+                    {{ message }}
+                    <button onclick="this.parentElement.remove()" class="float-right text-gray-400 hover:text-gray-600">
+                        ✕
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+    <main class="flex-grow pt-6">
+        <div class="max-w-7xl mx-auto px-4">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+
+    <footer class="bg-white border-t border-gray-200 mt-8">
+        <div class="max-w-7xl mx-auto px-4 py-3 text-sm text-gray-400">
+            Hexlet
+        </div>
+    </footer>
+</body>
+</html>
