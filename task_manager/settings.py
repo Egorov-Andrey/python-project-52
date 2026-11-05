@@ -182,3 +182,4 @@ else:
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+SHELL_PLUS_PRINT_SQL = True

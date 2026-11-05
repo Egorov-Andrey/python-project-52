@@ -19,14 +19,14 @@
             
 
             <div class="flex items-center space-x-6">
-                <span class="text-gray-700 font-medium">Менеджер задач</span>
-                <span class="text-gray-500">Пользователи</span>
+                <span class="text-gray-700 font-medium"><a href="{% url 'main' %}">Менеджер задач</a></span>
+                <span class="text-gray-500"><a href="{% url 'users' %}">Пользователи</a></span>
             </div>
 
 
             <div class="flex items-center space-x-6">
-                <span class="text-gray-500">Вход</span>
-                <span class="text-gray-500">Регистрация</span>
+                <span class="text-gray-500"><a href="{% url 'login' %}">Вход</a></span>
+                <span class="text-gray-500"><a href="{% url 'user_create' %}">Регистрация</a></span>
                 
 
                 {% include "lang_form.html" with redirect_to=request.path %}
