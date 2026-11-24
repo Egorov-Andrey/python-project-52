@@ -149,6 +149,7 @@ USE_TZ = True
 #  yourcustomdomain.com/static/...
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "assets",]
+TAILWIND_CLI_SRC_CSS = BASE_DIR / "assets/css/source.css"
 
 LOCALE_PATHS = [BASE_DIR / "locale",]
 

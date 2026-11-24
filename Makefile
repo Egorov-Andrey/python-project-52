@@ -12,7 +12,10 @@ migrate:
 collectstatic:
 	$(MANAGE) collectstatic --noinput
 
-setup: install collectstatic migrate
+setup: install build-css collectstatic migrate
+
+build-css:
+	uv run python manage.py tailwind build --force
 
 runserver:
 	@echo "Запуск сервера... (Ctrl+C для остановки)"

@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, redirect_to_login
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -23,7 +23,6 @@ class CustomLoginView(SuccessMessageMixin, LoginView):
         return reverse_lazy('main')
 
     def form_valid(self, form):
-        print(">>> CustomLoginView.form_valid вызван!")  # ← добавь это
         return super().form_valid(form)
 
 
@@ -51,6 +50,15 @@ class CustomUpdateView(SuccessMessageMixin, UpdateView):
     form_class = CustomUserUpdateForm
     template_name = 'users/update.html'
     success_message = "Пользователь успешно изменен"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect_to_login(request.get_full_path())
+        obj = self.get_object()
+        if request.user != obj and request.user.has_perm('users.change_user'):
+            return redirect('main')
+        
+        return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse_lazy('main')

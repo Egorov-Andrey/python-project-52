@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+@source "../../labels/templates";
+@source "../../pages/templates";
+@source "../../statuses/templates";
+@source "../../tasks/templates";
+@source "../../users/templates";
+

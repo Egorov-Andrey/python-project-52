@@ -218,3 +218,6 @@ __marimo__/
 *.cast
 
 .python-version
+
+.django_tailwind_cli
+assets/css/tailwind.css

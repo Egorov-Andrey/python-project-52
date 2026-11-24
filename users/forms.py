@@ -29,6 +29,7 @@ class CustomUserCreationForm(UserCreationForm):
             'class': 'w-full border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500'
         })
     )
+        
     last_name = forms.CharField(
         label='Фамилия',
         required=False,

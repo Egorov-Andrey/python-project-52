@@ -10,27 +10,15 @@
             {% csrf_token %}
             
             <!-- Имя -->
-            <div class="mb-3">
-                <label for="first_name" class="block text-sm text-gray-600 mb-1">
-                    Имя:
-                </label>
-                <input type="text" 
-                       name="first_name" 
-                       id="first_name"
-                       class="w-full border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+            <div class="block text-sm text-gray-600 mb-1">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
             </div>
-            
             <!-- Фамилия -->
-            <div class="mb-3">
-                <label for="last_name" class="block text-sm text-gray-600 mb-1">
-                    Фамилия:
-                </label>
-                <input type="text" 
-                       name="last_name" 
-                       id="last_name"
-                       class="w-full border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+            <div class="block text-sm text-gray-600 mb-1">
+            {{ form.last_name.label_tag }}
+            {{ form.last_name }}
             </div>
-            
             <!-- Имя пользователя -->
             <div class="mb-3">
                 <label for="username" class="block text-sm text-gray-600 mb-1">
@@ -39,10 +27,7 @@
                 <p class="text-xs text-gray-400 mb-1">
                     Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+-/_`.
                 </p>
-                <input type="text" 
-                       name="username" 
-                       id="username"
-                       class="w-full border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                {{ form.username }}
             </div>
             
             <!-- Пароль -->
@@ -53,10 +38,7 @@
                 <p class="text-xs text-gray-400 mb-1">
                     Ваш пароль должен содержать как минимум 3 символа.
                 </p>
-                <input type="password" 
-                       name="password1" 
-                       id="password1"
-                       class="w-full border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                {{ form.password1 }}
             </div>
             
             <!-- Подтверждение пароля -->
@@ -67,10 +49,7 @@
                 <p class="text-xs text-gray-400 mb-1">
                     Для подтверждения введите, пожалуйста, пароль ещё раз.
                 </p>
-                <input type="password" 
-                       name="password2" 
-                       id="password2"
-                       class="w-full border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                {{ form.password2 }}
             </div>
             
             <!-- Ошибки формы -->
